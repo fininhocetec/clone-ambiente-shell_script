@@ -1,4 +1,8 @@
 ![shell-script](https://img.shields.io/badge/shell-script-red?style=flat-square)
+![docker](https://img.shields.io/badge/docker-19.03.12-green?style=flat-square)
+![docker-compose](https://img.shields.io/badge/docker--compose-----compatibility-orange?style=flat-square?style=flat-square)
+![wildfly](https://img.shields.io/badge/wildfly-10-yellow?style=flat-square)
+![metabase](https://img.shields.io/badge/metabase-7--v0.34.0-lightgrey?style=flat-square)
 
 Clonar e Remover Ambiente de Feature
 ========================
@@ -20,7 +24,9 @@ removerfeature.sh - Remove completamente um ambiente apartir do nome do
 Requisitos
 ------------
 
-Não se aplica.
+- Docker (incluindo docker-compose)
+- Diretório Base para ser duplicado e renomeado
+- Ambiente de develop and homolog completo (MySQL, Wildfly, MongoDB, Nexus, GitLab, Jenkins, Metabase e Traefik)
 
 
 Dependências
