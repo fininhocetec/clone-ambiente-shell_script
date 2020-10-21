@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# removerfeature.sh - Remove completamente um ambiente apartir do nome do
+# removerfeature - Remove completamente um ambiente apartir do nome do
 #                    seu projeto.
 #
 #
@@ -16,7 +16,7 @@
 #  Este programa irá remover todo conteúdo que faz parte do projeto/feature
 #  criada para o ambiente em questão.
 #  Exemplos:
-# $ sh removerfeature.sh "nome do ambinte"
+# $ removerfeature "nome do ambinte"
 #      Neste exemplo você deverá usar o argumento nome do projeto, ao qual
 #      queira remover, exemplo "feature-relatorio".
 #
@@ -24,16 +24,19 @@
 #                         CONFIRA SEMPRE O NOME DO PROJETO A SER REMOVIDO!!!
 #                        DEVERÁ SER DIGITADO EXATAMENTE O NOME DO PROJETO".
 #
-# $ sh removerfeature.sh feature-relatorio
+# $ removerfeature feature-relatorio
 #     argumento 1: "nome do projeto"
 #   ou
-# $ source removerfeature.sh feature-relatorio
+# $ removerfeature feature-relatorio
 #     argumento 1: "nome do projeto"
 # ------------------------------------------------------------------------ #
 # Histórico:
 #
 #   v1.0 25/09/2020, willdymark:
 #       - Início do programa
+#   v1.1 09/10/2020, willdymark:
+#       - Inclussão de verificação de pastas do sistema, para evitar que sejam
+#         apagadas de forma indevida.
 # ------------------------------------------------------------------------ #
 # Testado em:
 #   bash 5.0.16
@@ -41,11 +44,21 @@
 NOMEWILDFLY="wildfly-$1"
 NOMEMETABASE="metabase-$1"
 NOMEDIR="$1"
-DIREXISTE="$HOME/pasta_do_projeto/$1"
+DIREXISTE="$HOME/reframax/$1"
+HOME="$HOME/reframax/"
+DIRSISTEMA=("dev" "backups" "base" "jenkins" "metabase" "mongodb" "deploy" "databases" "mysql" "reframax" "wildfly" "wildfly-files")
 # ------------------------------- TESTES --------------------------------- #
 #verificar se o argumento nome do projeto foi digitado;
-[ $# -lt 1 ] && echo "Faltou passar o nome do Projeto a ser removido!!!" && return
-[ ! -d "$DIREXISTE" ] && echo "Não existe um projeto com nome $1." && return
+[ $# -lt 1 ] && echo "Faltou passar o nome do Projeto a ser removido!!!" && exit 1
+
+for ((i=0; i<${#DIRSISTEMA[@]}; i++)); do
+  if [ "${DIRSISTEMA[$i]}" == "$1" ]; then
+    echo "Este diretório perntece ao sistema e não poderá ser removido!!!"
+    exit 1
+  fi
+done
+
+[ ! -d "$DIREXISTE" ] && echo "Não existe um projeto com nome $1." && exit 1
 # ------------------------ FUNÇÕES PRE EXECUÇÃO -------------------------- #
 read -r -p "Você tem certeza? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
