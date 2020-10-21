@@ -44,9 +44,9 @@
 NOMEWILDFLY="wildfly-$1"
 NOMEMETABASE="metabase-$1"
 NOMEDIR="$1"
-DIREXISTE="$HOME/reframax/$1"
-HOME="$HOME/reframax/"
-DIRSISTEMA=("dev" "backups" "base" "jenkins" "metabase" "mongodb" "deploy" "databases" "mysql" "reframax" "wildfly" "wildfly-files")
+DIREXISTE="$HOME/pasta_projeto/$1"
+HOME="$HOME/pasta_projeto/"
+DIRSISTEMA=("dev" "backups" "base" "jenkins" "metabase" "mongodb" "deploy" "databases" "mysql" "pasta_projeto" "wildfly" "wildfly-files")
 # ------------------------------- TESTES --------------------------------- #
 #verificar se o argumento nome do projeto foi digitado;
 [ $# -lt 1 ] && echo "Faltou passar o nome do Projeto a ser removido!!!" && exit 1
